@@ -1,0 +1,2 @@
+# ignore storybook and node module
+node_modules/
