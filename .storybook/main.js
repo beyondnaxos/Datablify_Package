@@ -9,7 +9,7 @@ module.exports = {
     "@storybook/addon-interactions"
   ],
   "core": {
-    builder: 'webpack5',
+    "builder": 'webpack5',
   },
   "framework": "@storybook/react"
 }

@@ -1,1 +1,1 @@
-export * from './Datablify';
+export * from './Datablify.jsx';
