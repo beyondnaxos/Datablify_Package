@@ -1,0 +1,8 @@
+.tableCompContainer {
+    width: 800px;
+}
+
+.viewAndSearch {
+    display: flex;
+    justify-content: space-between;
+}
