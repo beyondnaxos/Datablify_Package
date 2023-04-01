@@ -1,3 +1,4 @@
+
 import styles from './Datablify.module.css'
 
 export const Datablify = ({ data, categories }) => {
@@ -13,6 +14,21 @@ export const Datablify = ({ data, categories }) => {
     }, 750)
   }
 
+  
+  const limitRows = (e) => {
+    const limit = Number(e.target.value)
+    const rows = document.querySelectorAll('.tableRow')
+    rows.forEach((row, index) => {
+      if (index >= limit) {
+        console.log('change')
+        row.style.display = 'none'
+      } else {
+        console.log('changed')
+        row.style.display = 'block'
+      }
+    })
+  }
+
   return (
     <section className={styles.tableCompContainer}>
       {isValidData ? (
@@ -20,7 +36,7 @@ export const Datablify = ({ data, categories }) => {
           <div className={styles.viewAndSearch}>
             <div className={styles.limitViewContainer}>
               <span className={styles.spaninfo}>Show</span>
-              <select>
+              <select onChange={(e) => limitRows(e)}>
                 <option value="10">10</option>
                 <option value="25">25</option>
                 <option value="50">50</option>
