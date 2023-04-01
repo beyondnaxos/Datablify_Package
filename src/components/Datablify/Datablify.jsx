@@ -1,30 +1,34 @@
-
 import styles from './Datablify.module.css'
 
 export const Datablify = ({ data, categories }) => {
-
+  
   const isValidData = categories.length === Object.keys(data[0]).length
 
+  let timeOutId = null
+
   const copyToClipboard = (e) => {
-    const text = e.target.innerText
-    navigator.clipboard.writeText(text)
-    e.target.innerText = 'Copied'
-    setTimeout(() => {
-      e.target.innerText = text
-    }, 750)
+    if (timeOutId === null) {
+      const text = e.target.innerText
+      const copied = 'Copied'
+      navigator.clipboard.writeText(text)
+      e.target.innerText = copied
+      timeOutId = setTimeout(() => {
+        e.target.innerText = text
+        timeOutId = null
+      }, 750)
+    }
   }
 
-  
   const limitRows = (e) => {
     const limit = Number(e.target.value)
-    const rows = document.querySelectorAll('.tableRow')
-    rows.forEach((row, index) => {
+    const myrows = document.querySelectorAll('.tableRowLimit')
+    myrows.forEach((row, index) => {
       if (index >= limit) {
         console.log('change')
         row.style.display = 'none'
       } else {
         console.log('changed')
-        row.style.display = 'block'
+        row.style.display = 'table-row'
       }
     })
   }
@@ -62,9 +66,14 @@ export const Datablify = ({ data, categories }) => {
             </thead>
             <tbody>
               {data?.map((row, index) => (
-                <tr className={styles.tableRow} key={index}>
+                <tr className={`${styles.tableRow} tableRowLimit`} key={index}>
                   {Object.entries(row).map(([key, value]) => (
-                    <td className={styles.rowData} onClick={(e) => copyToClipboard(e)}>{value}</td>
+                    <td
+                      className={styles.rowData}
+                      onClick={(e) => copyToClipboard(e)}
+                    >
+                      {value}
+                    </td>
                   ))}
                 </tr>
               ))}
