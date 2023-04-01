@@ -7,6 +7,20 @@ import { Datablify } from '../components/Datablify'
 const stories = storiesOf('Datablify', module)
 
 stories.add('Default', () => {
+
+  const categories = [
+    'First Name',
+    'Last Name',
+    'Start Date',
+    'Department',
+    'Date of Birth',
+    'Street',
+    'City',
+    'State',
+    'Zip Code',
+  ]
+
+
     const data = [
       {
         firstName: "Patrick",
@@ -20,7 +34,7 @@ stories.add('Default', () => {
         zipCode: "45650",
       },
       {
-        firstName: "Patrick",
+        firstName: "JL",
         lastName: "Bouboulina",
         startDate: "2022-01-01",
         department: "Info",
@@ -113,7 +127,7 @@ stories.add('Default', () => {
       return (
         <div>
           <h1>Exemple de tableau</h1>
-          <Datablify data={data} />
+          <Datablify data={data} categories={categories} />
         </div>
       );
 })

@@ -30,7 +30,8 @@
 }
 
 .tableRow:hover {
-    background-color: rgb(236, 236, 238);
+    background-color: #5e5e68;
+    color: white;
 }
 
 .title {
@@ -40,6 +41,7 @@
     color: white;
     border: 1px solid black;
     padding: 3px 7px;
+    text-align: start;
 }
 
 .rowData {
@@ -48,10 +50,14 @@
     border-left: 1px solid black;
     border-right: 1px solid black;
     padding: 3px 8px;
+    /* beautiful cubic bezier */
+    /* transition: all 0.15s cubic-bezier(0.25, 0.8, 0.25, 1); */
 }
 
 .rowData:hover {
-    background-color: rgb(205, 212, 226);
+    background-color: #161618;
+    color: white;
+    /* transition: all 0.05s cubic-bezier(0.25, 0.8, 0.25, 1); */
 }
 
 
