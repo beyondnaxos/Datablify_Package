@@ -50,6 +50,7 @@
     border-left: 1px solid black;
     border-right: 1px solid black;
     padding: 3px 8px;
+    cursor: pointer;
     /* beautiful cubic bezier */
     /* transition: all 0.15s cubic-bezier(0.25, 0.8, 0.25, 1); */
 }
@@ -76,4 +77,50 @@
     font-size: 18px;
     color: rgb(0, 0, 0);
     font-weight: 600;
+}
+
+.errorContainer  {
+    border: 2px dashed rgb(22, 22, 22);
+    width: fit-content;
+    padding: 10px;
+}
+
+.errorTitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+}
+
+.errorText {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+}
+
+.errorCompare {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+}
+
+.counter {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    color: rgb(250, 73, 73);
+    font-weight: 600;
+}
+
+.myTooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.show {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 1s;
 }
