@@ -40,7 +40,7 @@ export const Datablify = ({ data, categories }) => {
     ))
   }
 
-  const getRows = (row, index) => {
+  const getRow = (row, index) => {
     return Object.entries(row).map(([key, value]) => (
       <td
         key={index + Math.random()}
@@ -80,6 +80,26 @@ export const Datablify = ({ data, categories }) => {
     )
   }
 
+  const searchInput = (e) => {
+    const search = e.target.value.toLowerCase()
+    const myrows = document.querySelectorAll('.tableRowLimit')
+    myrows.forEach((row) => {
+      const rowText = row.innerText.toLowerCase()
+      if (rowText.includes(search)) {
+        row.style.display = 'table-row'
+      } else {
+        row.style.display = 'none'
+      }
+    })
+   
+    // if (myrows.length < 1) {
+    //   const notFound = document.querySelector('.notFound')
+    //   notFound.innerHTML = 'Not Found'
+    // }
+  }
+
+
+
   return (
     <section className={styles.tableCompContainer}>
       {isValidData ? (
@@ -92,6 +112,7 @@ export const Datablify = ({ data, categories }) => {
             </div>
             <div>
               <input
+                onKeyUp={(e) => searchInput(e)}
                 type="text"
                 className={styles.searchInput}
                 placeholder="Search..."
@@ -105,11 +126,12 @@ export const Datablify = ({ data, categories }) => {
             <tbody>
               {data?.map((row, index) => (
                 <tr className={`${styles.tableRow} tableRowLimit`} key={index}>
-                  {getRows(row, index)}
+                  {getRow(row, index)}
                 </tr>
               ))}
             </tbody>
           </table>
+          {/* <div className="notFound"></div> */}
         </>
       ) : (
         getError(data, categories)
