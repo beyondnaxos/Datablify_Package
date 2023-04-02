@@ -98,8 +98,6 @@ export const Datablify = ({ data, categories }) => {
     // }
   }
 
-
-
   return (
     <section className={styles.tableCompContainer}>
       {isValidData ? (
@@ -121,7 +119,7 @@ export const Datablify = ({ data, categories }) => {
           </div>
           <table className={styles.tableContainer}>
             <thead>
-              <tr>{getCategories(categories)}</tr>
+              <tr className={`${styles.categoryHandle} categoryHandleStyle`}>{getCategories(categories)}</tr>
             </thead>
             <tbody>
               {data?.map((row, index) => (
