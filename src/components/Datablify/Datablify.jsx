@@ -32,6 +32,54 @@ export const Datablify = ({ data, categories }) => {
     })
   }
 
+  const getCategories = (categories) => {
+    return categories.map((category, index) => (
+      <th key={index} className={styles.title}>
+        {category}
+      </th>
+    ))
+  }
+
+  const getRows = (row, index) => {
+    return Object.entries(row).map(([key, value]) => (
+      <td
+        key={index + Math.random()}
+        className={styles.rowData}
+        onClick={(e) => copyToClipboard(e)}
+      >
+        {value}
+      </td>
+    ))
+  }
+
+  const getError = (data, categories) => {
+    return (
+      <div className={styles.errorContainer}>
+        <h1 className={styles.errorTitle}>Error</h1>
+        <p className={styles.errorText}>
+          Categories and datas are not corresponding
+        </p>
+        <p className={styles.errorCompare}>
+          you have <span className={styles.counter}>{categories.length}</span>{' '}
+          categories and{' '}
+          <span className={styles.counter}>{Object.keys(data[0]).length}</span>{' '}
+          value(s) per row{' '}
+        </p>
+      </div>
+    )
+  }
+
+  const getSelect = () => {
+    return (
+      <select onChange={(e) => limitRows(e)}>
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    )
+  }
+
   return (
     <section className={styles.tableCompContainer}>
       {isValidData ? (
@@ -39,12 +87,7 @@ export const Datablify = ({ data, categories }) => {
           <div className={styles.viewAndSearch}>
             <div className={styles.limitViewContainer}>
               <span className={styles.spaninfo}>Show</span>
-              <select onChange={(e) => limitRows(e)}>
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-              </select>
+              {getSelect()}
               <span className={styles.spaninfo}>entries</span>
             </div>
             <div>
@@ -57,46 +100,19 @@ export const Datablify = ({ data, categories }) => {
           </div>
           <table className={styles.tableContainer}>
             <thead>
-              <tr>
-                {categories.map((category, index) => (
-                  <th key={index} className={styles.title}>
-                    {category}
-                  </th>
-                ))}
-              </tr>
+              <tr>{getCategories(categories)}</tr>
             </thead>
             <tbody>
               {data?.map((row, index) => (
                 <tr className={`${styles.tableRow} tableRowLimit`} key={index}>
-                  {Object.entries(row).map(([key, value]) => (
-                    <td
-                      key={index + Math.random()}
-                      className={styles.rowData}
-                      onClick={(e) => copyToClipboard(e)}
-                    >
-                      {value}
-                    </td>
-                  ))}
+                  {getRows(row, index)}
                 </tr>
               ))}
             </tbody>
           </table>
         </>
       ) : (
-        <div className={styles.errorContainer}>
-          <h1 className={styles.errorTitle}>Error</h1>
-          <p className={styles.errorText}>
-            Categories and datas are not corresponding
-          </p>
-          <p className={styles.errorCompare}>
-            you have <span className={styles.counter}>{categories.length}</span>{' '}
-            categories and{' '}
-            <span className={styles.counter}>
-              {Object.keys(data[0]).length}
-            </span>{' '}
-            value(s) per row{' '}
-          </p>
-        </div>
+        getError(data, categories)
       )}
     </section>
   )
