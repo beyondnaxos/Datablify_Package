@@ -98,6 +98,8 @@ export const Datablify = ({ data, categories }) => {
     // }
   }
 
+
+
   return (
     <section className={styles.tableCompContainer}>
       {isValidData ? (
@@ -127,6 +129,7 @@ export const Datablify = ({ data, categories }) => {
                   {getRow(row, index)}
                 </tr>
               ))}
+              {/* <td class="dataTables_empty">No matching records found</td> */}
             </tbody>
           </table>
           {/* <div className="notFound"></div> */}
