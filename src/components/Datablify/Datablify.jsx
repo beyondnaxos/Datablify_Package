@@ -84,17 +84,17 @@ export const Datablify = ({ data, categories }) => {
     const search = e.target.value.toLowerCase()
     const myrows = document.querySelectorAll('.tableRowLimit')
     const emptyRow = document.querySelector('.dataTables_empty')
-    let hasMatch = false 
+    let hasMatch = false
     myrows.forEach((row) => {
       const rowText = row.innerText.toLowerCase()
       if (rowText.includes(search)) {
         row.style.display = 'table-row'
-        hasMatch = true 
+        hasMatch = true
       } else {
         row.style.display = 'none'
       }
     })
-    emptyRow.style.display = hasMatch ? 'none' : 'table-row' 
+    emptyRow.style.display = hasMatch ? 'none' : 'table-row'
   }
 
   return (
