@@ -84,21 +84,18 @@ export const Datablify = ({ data, categories }) => {
     const search = e.target.value.toLowerCase()
     const myrows = document.querySelectorAll('.tableRowLimit')
     const emptyRow = document.querySelector('.dataTables_empty')
+    let hasMatch = false 
     myrows.forEach((row) => {
       const rowText = row.innerText.toLowerCase()
       if (rowText.includes(search)) {
         row.style.display = 'table-row'
-        // emptyRow.style.display = 'none'
-
+        hasMatch = true 
       } else {
         row.style.display = 'none'
-        emptyRow.style.display = 'table-row'
       }
     })
-
+    emptyRow.style.display = hasMatch ? 'none' : 'table-row' 
   }
-
-
 
   return (
     <section className={styles.tableCompContainer}>
@@ -121,7 +118,9 @@ export const Datablify = ({ data, categories }) => {
           </div>
           <table className={styles.tableContainer}>
             <thead>
-              <tr className={`${styles.categoryHandle} categoryHandleStyle`}>{getCategories(categories)}</tr>
+              <tr className={`${styles.categoryHandle} categoryHandleStyle`}>
+                {getCategories(categories)}
+              </tr>
             </thead>
             <tbody>
               {data?.map((row, index) => (
@@ -129,7 +128,9 @@ export const Datablify = ({ data, categories }) => {
                   {getRow(row, index)}
                 </tr>
               ))}
-              <td class="dataTables_empty" style={{display: 'none'}}>No matching records found</td>
+              <td class="dataTables_empty" style={{ display: 'none' }}>
+                No matching records found
+              </td>
             </tbody>
           </table>
         </>
