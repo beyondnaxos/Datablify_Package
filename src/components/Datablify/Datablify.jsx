@@ -1,7 +1,6 @@
 import styles from './Datablify.module.css'
 
 export const Datablify = ({ data, categories }) => {
-  
   const isValidData = categories.length === Object.keys(data[0]).length
 
   let timeOutId = null
@@ -59,8 +58,10 @@ export const Datablify = ({ data, categories }) => {
           <table className={styles.tableContainer}>
             <thead>
               <tr>
-                {categories.map((category) => (
-                  <th className={styles.title}>{category}</th>
+                {categories.map((category, index) => (
+                  <th key={index} className={styles.title}>
+                    {category}
+                  </th>
                 ))}
               </tr>
             </thead>
@@ -69,6 +70,7 @@ export const Datablify = ({ data, categories }) => {
                 <tr className={`${styles.tableRow} tableRowLimit`} key={index}>
                   {Object.entries(row).map(([key, value]) => (
                     <td
+                      key={index + Math.random()}
                       className={styles.rowData}
                       onClick={(e) => copyToClipboard(e)}
                     >

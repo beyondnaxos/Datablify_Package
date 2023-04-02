@@ -7,6 +7,7 @@ import { Datablify } from '../components/Datablify'
 const stories = storiesOf('Datablify', module)
 
 stories.add('Default', () => {
+  
   const categories = [
     'First Name',
     'Last Name',
