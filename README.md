@@ -18,6 +18,7 @@ yarn add datablify
 ## Usage
 
 To use Datablify in your React project, you need to import it and pass it the required props:
+(you can use as many data items as you want in condition that they have the same lenght as the categories prop )
 
 ```javascript
 import { Datablify } from 'datablify'
