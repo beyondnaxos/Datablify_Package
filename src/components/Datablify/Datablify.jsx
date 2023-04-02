@@ -83,19 +83,19 @@ export const Datablify = ({ data, categories }) => {
   const searchInput = (e) => {
     const search = e.target.value.toLowerCase()
     const myrows = document.querySelectorAll('.tableRowLimit')
+    const emptyRow = document.querySelector('.dataTables_empty')
     myrows.forEach((row) => {
       const rowText = row.innerText.toLowerCase()
       if (rowText.includes(search)) {
         row.style.display = 'table-row'
+        // emptyRow.style.display = 'none'
+
       } else {
         row.style.display = 'none'
+        emptyRow.style.display = 'table-row'
       }
     })
-   
-    // if (myrows.length < 1) {
-    //   const notFound = document.querySelector('.notFound')
-    //   notFound.innerHTML = 'Not Found'
-    // }
+
   }
 
 
@@ -129,10 +129,9 @@ export const Datablify = ({ data, categories }) => {
                   {getRow(row, index)}
                 </tr>
               ))}
-              {/* <td class="dataTables_empty">No matching records found</td> */}
+              <td class="dataTables_empty" style={{display: 'none'}}>No matching records found</td>
             </tbody>
           </table>
-          {/* <div className="notFound"></div> */}
         </>
       ) : (
         getError(data, categories)
