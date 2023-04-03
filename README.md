@@ -1,18 +1,18 @@
 
 # Datablify
 
-Datablify is a React component that renders a table with data and provides functionalities such as search and row limit options. It is styled with CSS modules.
+Datablifly is a React component that renders a table with data and provides functionalities such as search and row limit options. It is styled with CSS modules.
 
 ## Installation
 
 To install Datablify, you can use either npm or yarn:
 
 ```bash
-npm install datablify
+npm install datablifly
 ```
 
 ```bash
-yarn add datablify
+yarn add datablifly
 ```
 
 ## Usage
