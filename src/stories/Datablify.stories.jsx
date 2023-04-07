@@ -543,7 +543,7 @@ stories.add('Default', () => {
   return (
     <div>
       <h1>Datablify</h1>
-      <Datablify data={data} categories={categories} />
+      <Datablify data={data} categories={categories} headColor={'orange'} titleHeadColor={'black'}/>
     </div>
   )
 })

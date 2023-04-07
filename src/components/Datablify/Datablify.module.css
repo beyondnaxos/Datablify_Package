@@ -5,8 +5,7 @@
 }
 
 .tableCompContainer {
-    max-width: 80vw;
-    min-width: 770px;
+    width: 100%;
     padding: 20px;
     /* background-color: aqua; */
 }
@@ -15,6 +14,9 @@
 .tableContainer {
     background-color: rgb(255, 255, 255);
     width: 100%;
+    min-width: 900px;
+    border-spacing:0; /* Removes the cell spacing via CSS */
+    border-collapse: collapse; 
 }
 
 .viewAndSearch {
@@ -128,4 +130,14 @@
 
 .notFound {
     display: none;
+}
+
+@media screen and (max-width: 550px) {
+  .viewAndSearch {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 10px;
+    width: 100%;
+    
+  }
 }

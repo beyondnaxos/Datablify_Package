@@ -1,6 +1,23 @@
+import React from 'react'
 import styles from './Datablify.module.css'
 
-export const Datablify = ({ data, categories }) => {
+export const Datablify = (props) => {
+  const data = props.data
+  const categories = props.categories
+  let headColor = props.headColor? props.headColor : 'black'
+  let titleHeadColor = props.titleHeadColor?  props.titleHeadColor : 'white'
+
+
+  const [customHeadColor, setCustomHeadColor] = React.useState('#020202')
+  const [customTitleHeadColor, setCustomTitleHeadColor] = React.useState('#020202')
+  const [sortColumn, setSortColumn] = React.useState(null)
+  const [sortOrder, setSortOrder] = React.useState(null)
+
+  React.useEffect(() => {
+    setCustomHeadColor(headColor)
+    setCustomTitleHeadColor(titleHeadColor)
+  }, [headColor, titleHeadColor])
+
   const isValidData = categories.length === Object.keys(data[0]).length
 
   let timeOutId = null
@@ -32,10 +49,40 @@ export const Datablify = ({ data, categories }) => {
     })
   }
 
+  let white = '#020202'
+
+  const [sortingState, setSortingState] = React.useState({
+    activeCategory: '',
+    direction: ''
+  })
+
   const getCategories = (categories) => {
     return categories.map((category, index) => (
-      <th key={index} className={styles.title}>
+      <th
+        key={index}
+        className={styles.title}
+        style={{ 
+          backgroundColor: customHeadColor,
+          color: customTitleHeadColor,
+        }}
+        onClick={() => {
+          if (sortingState.activeCategory === category) {
+            setSortingState({
+              ...sortingState,
+              direction: sortingState.direction === 'asc' ? 'desc' : 'asc'
+            })
+          } else {
+            setSortingState({
+              activeCategory: category,
+              direction: 'asc'
+            })
+          }
+          handleSort(index)
+        }}
+      >
         {category}
+        {sortingState.activeCategory === category &&
+          (sortingState.direction === 'asc' ? ' ▲' : ' ▼')}
       </th>
     ))
   }
@@ -45,6 +92,7 @@ export const Datablify = ({ data, categories }) => {
       <td
         key={index + Math.random()}
         className={styles.rowData}
+        style={{ textAlign: 'start' }} 
         onClick={(e) => copyToClipboard(e)}
       >
         {value}
@@ -68,6 +116,46 @@ export const Datablify = ({ data, categories }) => {
       </div>
     )
   }
+
+  
+
+  const handleSort = (index) => {
+    if (sortColumn === index) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')
+    } else {
+      setSortColumn(index)
+      setSortOrder('asc')
+    }
+  }
+
+  const sortedData = React.useMemo(() => {
+    if (sortColumn !== null && sortOrder !== null) {
+      const isAsc = sortOrder === 'asc'
+      return data.sort((a, b) => {
+        const valueA = a[Object.keys(a)[sortColumn]]
+        const valueB = b[Object.keys(b)[sortColumn]]
+        if (isAsc) {
+          if (valueA < valueB) {
+            return -1
+          } else if (valueA > valueB) {
+            return 1
+          } else {
+            return 0
+          }
+        } else {
+          if (valueA > valueB) {
+            return -1
+          } else if (valueA < valueB) {
+            return 1
+          } else {
+            return 0
+          }
+        }
+      })
+    } else {
+      return data
+    }
+  }, [data, sortColumn, sortOrder])
 
   const getSelect = () => {
     return (
@@ -98,7 +186,10 @@ export const Datablify = ({ data, categories }) => {
   }
 
   return (
-    <section className={styles.tableCompContainer}>
+    <section
+      className={styles.tableCompContainer}
+      style={{ overflowX: 'auto' }}
+    >
       {isValidData ? (
         <>
           <div className={styles.viewAndSearch}>
@@ -110,6 +201,7 @@ export const Datablify = ({ data, categories }) => {
             <div>
               <input
                 onKeyUp={(e) => searchInput(e)}
+                onPaste={(e) => searchInput(e)}
                 type="text"
                 className={styles.searchInput}
                 placeholder="Search..."
@@ -123,14 +215,14 @@ export const Datablify = ({ data, categories }) => {
               </tr>
             </thead>
             <tbody>
-              {data?.map((row, index) => (
+              {sortedData?.map((row, index) => (
                 <tr className={`${styles.tableRow} tableRowLimit`} key={index}>
                   {getRow(row, index)}
                 </tr>
               ))}
-              <td class="dataTables_empty" style={{ display: 'none' }}>
-                No matching records found
-              </td>
+              <tr className="dataTables_empty" style={{ display: 'none' }}>
+                <td>No matching records found</td>
+              </tr>
             </tbody>
           </table>
         </>

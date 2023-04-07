@@ -30,7 +30,7 @@ const MyComponent = () => {
     { id: 3, name: 'Bob Johnson', age: 40 },
   ]
 
-  const categories = ['ID', 'Name', 'Age']
+  const categories = ['ID', 'Name', 'Age', 'Adress']
 
   return <Datablify data={data} categories={categories} />
 }
