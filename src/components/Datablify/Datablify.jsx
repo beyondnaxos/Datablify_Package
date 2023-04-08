@@ -14,7 +14,7 @@ export const Datablify = (props) => {
   })
 
   const [currentPage, setCurrentPage] = React.useState(1)
-  const [recordsPerPage] = React.useState(10)
+  const [recordsPerPage, setRecordsPerPage] = React.useState(10)
   
   const data = props.data
   const categories = props.categories
@@ -49,6 +49,7 @@ export const Datablify = (props) => {
   const limitRows = (e) => {
     const limit = Number(e.target.value)
     const myrows = document.querySelectorAll('.tableRowLimit')
+    setRecordsPerPage(limit)
     myrows.forEach((row, index) => {
       if (index >= limit) {
         console.log('change')
@@ -217,7 +218,8 @@ export const Datablify = (props) => {
               </tr>
             </thead>
             <tbody>
-              {sortedData?.map((row, index) => (
+              {/* currentRecords ou sortedData */}
+              {currentRecords?.map((row, index) => (
                 <tr className={`${styles.tableRow} tableRowLimit`} key={index}>
                   {getRow(row, index)}
                 </tr>
