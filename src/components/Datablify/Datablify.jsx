@@ -1,23 +1,32 @@
 import React from 'react'
+import Pagination from './Pagination'
 import styles from './Datablify.module.css'
 
 export const Datablify = (props) => {
-
   const [customHeadColor, setCustomHeadColor] = React.useState('#020202')
-  const [customTitleHeadColor, setCustomTitleHeadColor] = React.useState('#020202')
+  const [customTitleHeadColor, setCustomTitleHeadColor] =
+    React.useState('#020202')
   const [sortColumn, setSortColumn] = React.useState(null)
   const [sortOrder, setSortOrder] = React.useState(null)
   const [sortingState, setSortingState] = React.useState({
     activeCategory: '',
-    direction: ''
+    direction: '',
   })
 
+  const [currentPage, setCurrentPage] = React.useState(1)
+  const [recordsPerPage] = React.useState(10)
+  
   const data = props.data
   const categories = props.categories
   const isValidData = categories.length === Object.keys(data[0]).length
-  let headColor = props.headColor? props.headColor : 'black'
-  let titleHeadColor = props.titleHeadColor?  props.titleHeadColor : 'white'
+  let headColor = props.headColor ? props.headColor : 'black'
+  let titleHeadColor = props.titleHeadColor ? props.titleHeadColor : 'white'
   let timeOutId = null
+  
+  const indexOfLastRecord = currentPage * recordsPerPage
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage
+  const currentRecords = data.slice(indexOfFirstRecord, indexOfLastRecord)
+  const nPages = Math.ceil(data.length / recordsPerPage)
 
   React.useEffect(() => {
     setCustomHeadColor(headColor)
@@ -56,7 +65,7 @@ export const Datablify = (props) => {
       <th
         key={index}
         className={styles.title}
-        style={{ 
+        style={{
           backgroundColor: customHeadColor,
           color: customTitleHeadColor,
         }}
@@ -64,12 +73,12 @@ export const Datablify = (props) => {
           if (sortingState.activeCategory === category) {
             setSortingState({
               ...sortingState,
-              direction: sortingState.direction === 'asc' ? 'desc' : 'asc'
+              direction: sortingState.direction === 'asc' ? 'desc' : 'asc',
             })
           } else {
             setSortingState({
               activeCategory: category,
-              direction: 'asc'
+              direction: 'asc',
             })
           }
           handleSort(index)
@@ -87,7 +96,7 @@ export const Datablify = (props) => {
       <td
         key={index + Math.random()}
         className={styles.rowData}
-        style={{ textAlign: 'start' }} 
+        style={{ textAlign: 'start' }}
         onClick={(e) => copyToClipboard(e)}
       >
         {value}
@@ -222,6 +231,11 @@ export const Datablify = (props) => {
       ) : (
         getError(data, categories)
       )}
+      <Pagination
+        nPages={nPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </section>
   )
 }
