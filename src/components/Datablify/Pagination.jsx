@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Datablify.module.css'
+import styles from './Pagination.module.css'
 
 const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
   const pageNumbers = [...Array(nPages + 1).keys()].slice(1)
