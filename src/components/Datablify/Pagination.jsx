@@ -8,7 +8,7 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
     if (currentPage !== nPages) console.log(currentPage)
     setCurrentPage(currentPage + 1)
   }
-  
+
   const prevPage = () => {
     if (currentPage !== 1) console.log(currentPage)
     setCurrentPage(currentPage - 1)

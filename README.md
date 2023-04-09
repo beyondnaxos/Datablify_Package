@@ -48,8 +48,8 @@ Datablify accepts the following props:
 
 - `data`: An array of objects that contains the data to be displayed in the table. Each object should have the same keys as the categories prop.
 - `categories`: An array of strings that contains the categories for the table. Each string should correspond to a key in the objects of the data prop.
-- `headColor`: A string that contains the color of the table header. 
-- `titleHeadColor`: A string that contains the color of the table header title. 
+- `headColor`: A string that contains the color of the table header.
+- `titleHeadColor`: A string that contains the color of the table header title.
 
 ## Functionalities
 
@@ -62,7 +62,8 @@ Datablify provides the following functionalities:
 - headerColor: The color custom of the table header.
 - titleHeadColor: The color custom of the table header title.
 
-Update 1.2 : 
+Update 1.2 :
+
 - {new} Sort by category: Clicking on a category will sort the table by that category in ascending or descending order.
 
 ## Styling
