@@ -140,4 +140,8 @@
     width: 100%;
     
   }
+  
+  .viewAndSearch :nth-child(1) { order: 1; }
+  .viewAndSearch :nth-child(2) { order: 3; }                                    
+  .viewAndSearch :nth-child(3) { order: 2; }
 }

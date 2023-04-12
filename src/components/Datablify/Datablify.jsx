@@ -15,14 +15,14 @@ export const Datablify = (props) => {
 
   const [currentPage, setCurrentPage] = React.useState(1)
   const [recordsPerPage, setRecordsPerPage] = React.useState(10)
-  
+
   const data = props.data
   const categories = props.categories
   const isValidData = categories.length === Object.keys(data[0]).length
   let headColor = props.headColor ? props.headColor : 'black'
   let titleHeadColor = props.titleHeadColor ? props.titleHeadColor : 'white'
   let timeOutId = null
-  
+
   const indexOfLastRecord = currentPage * recordsPerPage
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage
   const currentRecords = data.slice(indexOfFirstRecord, indexOfLastRecord)
@@ -201,6 +201,11 @@ export const Datablify = (props) => {
               {getSelect()}
               <span className={styles.spaninfo}>entries</span>
             </div>
+            <Pagination
+              nPages={nPages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
             <div>
               <input
                 onKeyUp={(e) => searchInput(e)}
@@ -233,11 +238,6 @@ export const Datablify = (props) => {
       ) : (
         getError(data, categories)
       )}
-      <Pagination
-        nPages={nPages}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
     </section>
   )
 }
