@@ -1,25 +1,3 @@
-import React from 'react';
-import { Story } from '@storybook/react';
-import { Datablify } from '../components/Datablify';
-
-export default {
-  title: 'Datablify',
-  component: Datablify,
-};
-
-const Template = () => {
-  const categories = [
-    'First Name',
-    'Last Name',
-    'Start Date',
-    'Department',
-    'Date of Birth',
-    'Street',
-    'City',
-    'State',
-    'Zip Code',
-  ];
-
   const data = [
     {
       firstName: 'Patrick',
@@ -539,13 +517,3 @@ const Template = () => {
       zipCode: '45650',
     },
   ]
-
-  return (
-    <div>
-      <h1>Datablify</h1>
-      <Datablify data={data} categories={categories} headColor={'orange'} titleHeadColor={'black'}/>
-    </div>
-  );
-};
-
-export const Default = Template.bind({});
