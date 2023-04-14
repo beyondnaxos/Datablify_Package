@@ -29,6 +29,7 @@ export const Datablify = (props) => {
   let timeOutId = null
 
   const nPages = Math.ceil(displayData.length / recordsPerPage)
+  const [sortTrigger, setSortTrigger] = React.useState(true);
 
   React.useEffect(() => {
     setCustomHeadColor(headColor)
@@ -43,6 +44,7 @@ export const Datablify = (props) => {
     })
     setDisplayData(filteredData)
     setCurrentPage(1)
+    setSortTrigger((prev) => !prev);
   }, [searchTerm])
 
   React.useEffect(() => {
@@ -73,7 +75,7 @@ export const Datablify = (props) => {
     }
     setDisplayData(sortedData)
     // setCurrentPage(1)
-  }, [ displayData, sortColumn, sortOrder])
+  }, [ sortTrigger, sortColumn, sortOrder])
 
 
   const copyToClipboard = (e) => {
