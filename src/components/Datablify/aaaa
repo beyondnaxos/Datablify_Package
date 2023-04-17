@@ -1,0 +1,26 @@
+<div className={styles.pagination}>
+      <button className={styles.paginationButton} style={{ order:1 }} onClick={prevPage}>
+        <span className={styles.paginationButtonIcon}>{'<'}</span>
+      </button>
+      {pageNumbers.map((number) => (
+        // currentPage === 2 ? 
+        // créer le bouton pour la première page 
+        // : 
+        // créer le bouton pour la première page 
+        // le bouton pour la page juste avant la page courante
+
+        // le bouton  pour juste après la page courante
+        // le bouton pour la dernière page
+        <button
+          key={number}
+          className={styles.paginationButton}
+          onClick={() => setCurrentPage(number)}
+          style={{ order:number +1 , color: colorCurrentPage(number) , backgroundColor: backgroundColorCurrentPage(number) }}
+        >
+          {number}
+        </button>
+      ))}
+      <button className={styles.paginationButton} style={{ order:pageNumbers.length +1}}  onClick={nextPage}>
+        <span className={styles.paginationButtonIcon}>{'>'}</span>
+      </button>
+    </div>
