@@ -1,13 +1,69 @@
 import React from 'react';
 import { Story } from '@storybook/react';
 import { Datablify } from '../components/Datablify';
+import { Table } from "david-mi-react-table"
+
+import generateEmployees from "employees-generator";
+
 
 export default {
   title: 'Datablify',
   component: Datablify,
 };
 
+
 const Template = () => {
+  const employees = generateEmployees({ amount: 10000 });
+  // const categories = [
+  //   "firstName",
+  //   "lastName",
+  //   "startDate",
+  //   "department",
+  //   "birthDate",
+  //   "state",
+  //   "street",
+  //   "city",
+  //   "zipCode"
+  // ]
+
+  // const columns  = [
+  //   {
+  //     title: "First Name",
+  //     accessor: "firstName"
+  //   },
+  //   {
+  //     title: "Last Name",
+  //     accessor: "lastName"
+  //   },
+  //   {
+  //     title: "Start Date",
+  //     accessor: "startDate"
+  //   },
+  //   {
+  //     title: "Department",
+  //     accessor: "department"
+  //   },
+  //   {
+  //     title: "Date of Birth",
+  //     accessor: "birthDate"
+  //   },
+  //   {
+  //     title: "Street",
+  //     accessor: "street"
+  //   },
+  //   {
+  //     title: "State",
+  //     accessor: "state"
+  //   },
+  //   {
+  //     title: "City",
+  //     accessor: "city"
+  //   },
+  //   {
+  //     title: "Zip Code",
+  //     accessor: "zipCode"
+  //   }
+  // ]
   const categories = [
     'First Name',
     'Last Name',
@@ -3623,7 +3679,8 @@ const Template = () => {
   return (
     <div>
       <h1>Datablify</h1>
-      <Datablify data={data} categories={categories} headColor={'orange'} titleHeadColor={'black'}/>
+      <Datablify data={employees} categories={categories} headColor={'orange'} titleHeadColor={'black'}/>
+      {/* <Table columns={columns} rows={employees}/> */}
     </div>
   );
 };
